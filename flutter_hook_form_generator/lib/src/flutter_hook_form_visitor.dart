@@ -1,26 +1,26 @@
 // ignore_for_file: depend_on_referenced_packages, avoid_print
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
+import 'package:flutter_zod/flutter_zod.dart';
 
 class ModelVisitor extends SimpleElementVisitor<void> {
-  String functionName = '';
-  String result = '';
-  Map<String, dynamic> fields = {};
+  List<Map<String, Map<String, Zod>>> forms = [];
+  dynamic value;
 
   @override
-  void visitTopLevelVariableElement(TopLevelVariableElement element) {
-    result = element.val;
-    // var type = element.type;
+  void visitFieldElement(FieldElement element) {
+    // fields[element.name] = element.type.toString().replaceFirst('*', '');
+    // value = element.computeConstantValue();
+    value = element.metadata;
+    // throw Exception(element);
 
-    // if (type is ParameterizedType) {
-    //   if (type.element is ClassElement && (type.element as ClassElement).name == 'Map') {
-    //     var typeArguments = type.typeArguments;
-    //     result = 'Found Map<String, dynamic> variable: ${element.name} - ${typeArguments.toString()}';
-    //     // if (typeArguments.length == 2 && typeArguments[0].isDartCoreString && typeArguments[1].isDartCoreObject) {
-    //     //   result = 'Found Map<String, dynamic> variable: ${element.name}';
-    //     // }
-    //   }
+    // if (element.metadata.any((meta) => meta.computeConstantValue()?.type?.name == 'FlutterHookForm')) {
+    //   var instanceMirror = reflect(element.metadata.first.computeConstantValue()?.type?.element?.newInstance);
+    //   var formsGetter = instanceMirror.getField(const Symbol('forms'));
+    //   var formsValue = formsGetter.reflectee;
+
+    //   print(formsValue);
     // }
+    super.visitFieldElement(element);
   }
 }

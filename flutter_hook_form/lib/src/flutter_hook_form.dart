@@ -1,4 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter_zod/flutter_zod.dart';
+
 enum InputType {
   textField,
   radio,
@@ -15,12 +16,10 @@ enum InputType {
   toggle,
 }
 
-class FlutterHookFormFieldSchema {
-  final InputType type;
-  final List<Function> validators;
+abstract class FlutterHookForms {
+  final Map<String, Map<String, Zod>> forms;
 
-  FlutterHookFormFieldSchema({
-    required this.type,
-    required this.validators,
+  FlutterHookForms({
+    required this.forms,
   });
 }

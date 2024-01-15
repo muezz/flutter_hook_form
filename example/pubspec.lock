@@ -198,6 +198,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hook_form:
+    dependency: "direct main"
+    description:
+      path: "../flutter_hook_form"
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_hook_form_annotation:
     dependency: "direct main"
     description:

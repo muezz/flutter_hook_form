@@ -9,21 +9,27 @@ import 'package:source_gen/source_gen.dart';
 
 class JsonGenerator extends GeneratorForAnnotation<FlutterHookForm> {
   @override
-  String generateForAnnotatedElement(
+  Future<String> generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) {
-    if (element is! TopLevelVariableElement || !element.type.isDartCoreMap) {
-      throw InvalidGenerationSourceError(
-        '@flutterHookForm can only be applied on top level Map<String, Zod> variable. Failing element: ${element.name}',
-        element: element,
-      );
-    }
+  ) async {
+    // if (element is! TopLevelVariableElement || !element.type.isDartCoreMap) {
+    //   throw InvalidGenerationSourceError(
+    //     '@flutterHookForm can only be applied on top level Map<String, Zod> variable. Failing element: ${element.name}',
+    //     element: element,
+    //   );
+    // }
     final visitor = ModelVisitor();
-    // element.visitChildren(visitor);
-    element.accept(visitor);
-    print(visitor.result);
+    element.visitChildren(visitor);
+    print(visitor.value);
+
+    // final LibraryElement library = await buildStep.resolver.libraryFor(buildStep.inputId);
+    // for (var unit in library.units) {
+    //   unit.visitChildren(visitor);
+    //   print(unit.)
+    //   print(visitor.value);
+    // }
 
     final buffer = StringBuffer();
 
